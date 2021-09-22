@@ -1,4 +1,7 @@
 import 'package:chopper/chopper.dart';
+import 'package:flutter/material.dart';
+import 'package:try_chopper/data/mobile_data_interceptor.dart';
+import 'package:try_chopper/data/network_connection_interceptor.dart';
 
 // Source code generation in Dart works by creating a new file which contains a "companion class".
 // In order for the source gen to know which file to generate and which files are "linked", you need to use the part keyword.
@@ -27,6 +30,20 @@ abstract class PostApiService extends ChopperService {
         _$PostApiService(),
       ],
       converter: JsonConverter(),
+      interceptors: [
+        HeadersInterceptor({'Cache-Control': 'no-cache'}),
+        HttpLoggingInterceptor(),
+        CurlInterceptor(),
+        MobileDataInterceptor(),
+        CheckNetworkConnectionInterceptor(),
+        // (Request request) async {
+        //   if (request.method == HttpMethod.Get) {
+        //     chopperLogger.info("------ Post request ------");
+        //   }
+
+        //   return request;
+        // },
+      ],
     );
 
     return _$PostApiService(client);
