@@ -1,11 +1,13 @@
 import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
-import 'package:flutter/material.dart';
-import 'package:try_chopper/data/mobile_data_interceptor.dart';
-import 'package:try_chopper/data/network_connection_interceptor.dart';
-import 'package:try_chopper/model/built_post.dart';
+// import 'package:flutter/material.dart';
+import 'package:try_chopper/Redux/src/Models/home_model/built_post.dart';
+import 'package:try_chopper/Redux/src/Models/serializers/serializers.dart';
+// import 'package:try_chopper/data/mobile_data_interceptor.dart';
+// import 'package:try_chopper/data/network_connection_interceptor.dart';
+// import 'package:try_chopper/model/built_post.dart';
 import 'package:built_collection/built_collection.dart';
-import 'package:try_chopper/model/serializers.dart';
+// import 'package:try_chopper/model/serializers.dart';
 // Source code generation in Dart works by creating a new file which contains a "companion class".
 // In order for the source gen to know which file to generate and which files are "linked", you need to use the part keyword.
 part 'post_api_service.chopper.dart';
