@@ -10,6 +10,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BuiltAuthToken.serializer)
       ..add(BuiltBranch.serializer)
       ..add(BuiltLogin.serializer)
+      ..add(BuiltLoginInputData.serializer)
       ..add(BuiltPost.serializer)
       ..add(BuiltUser.serializer))
     .build();

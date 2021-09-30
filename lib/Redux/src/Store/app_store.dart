@@ -9,20 +9,24 @@ class AppState extends Equatable {
   final HomeState homeState;
   final SinglePostState singlePostState;
   final LoginState loginState;
+  final Exception? error;
 
-  AppState(
-      {required this.homeState,
-      required this.singlePostState,
-      required this.loginState});
+  AppState({
+    required this.homeState,
+    required this.singlePostState,
+    required this.loginState,
+    required this.error,
+  });
 
   factory AppState.initial() {
     return AppState(
       homeState: HomeState.initial(),
       singlePostState: SinglePostState.initial(),
       loginState: LoginState.initial(),
+      error: null,
     );
   }
 
   @override
-  List<Object?> get props => [homeState, singlePostState,loginState];
+  List<Object?> get props => [homeState, singlePostState, loginState,error];
 }
