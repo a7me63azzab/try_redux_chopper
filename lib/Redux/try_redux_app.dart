@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
+import 'package:try_chopper/Redux/src/Containers/Auth/LoginPage/login_page.dart';
 import 'package:try_chopper/Redux/src/Containers/HomePage/home_page.dart';
 import 'package:try_chopper/Redux/src/Containers/PostDetailsPage/single_post_screen.dart';
 import 'package:try_chopper/Redux/src/Navigation/navigations.dart';
@@ -19,7 +20,8 @@ class TryReduxState extends StatelessWidget {
       child: MaterialApp(
         navigatorKey: Keys.navKey,
         title: 'Material App',
-        home: HomePageRedux(),
+        // home: HomePageRedux(),
+        home: LoginPage(),
         routes: {
           Routes.homeScreen: (context) {
             return HomePageRedux();
