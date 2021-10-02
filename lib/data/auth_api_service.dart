@@ -2,8 +2,11 @@ import 'package:chopper/chopper.dart';
 import 'package:chopper_built_value/chopper_built_value.dart';
 import 'package:try_chopper/Redux/src/Models/LoginModel/built_login.dart';
 import 'package:try_chopper/Redux/src/Models/LoginModel/login_input_data.dart';
+import 'package:try_chopper/Redux/src/Models/built_error.dart';
 
 import 'package:try_chopper/Redux/src/Models/serializers/serializers.dart';
+import 'package:try_chopper/data/mobile_data_interceptor.dart';
+import 'package:try_chopper/data/network_connection_interceptor.dart';
 
 part 'auth_api_service.chopper.dart';
 
@@ -29,8 +32,11 @@ abstract class AuthApiService extends ChopperService {
       ],
       // converter: BuiltValueConverter(serializers),
       converter: BuiltValueConverter(serializers),
+      errorConverter: BuiltValueConverter(serializers, errorType: BuiltErrorResponse),
       interceptors: [
         HttpLoggingInterceptor(),
+        CheckNetworkConnectionInterceptor(),
+        // MobileDataInterceptor(),
       ],
     );
 

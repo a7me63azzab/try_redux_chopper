@@ -6,7 +6,9 @@ import 'package:try_chopper/Redux/src/Store/app_store.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
-      homeState: homeReducer(state.homeState, action),
-      singlePostState: singlePostReducer(state.singlePostState, action),
-      loginState: loginReducer(state.loginState, action), error: errorReducer(state.error,action));
+    homeState: homeReducer(state.homeState, action),
+    singlePostState: singlePostReducer(state.singlePostState, action),
+    loginState: loginReducer(state.loginState, action),
+    error: errorReducer(state.error, action),
+  );
 }

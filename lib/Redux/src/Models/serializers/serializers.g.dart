@@ -9,6 +9,7 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BuiltAuthToken.serializer)
       ..add(BuiltBranch.serializer)
+      ..add(BuiltErrorResponse.serializer)
       ..add(BuiltLogin.serializer)
       ..add(BuiltLoginInputData.serializer)
       ..add(BuiltPost.serializer)
