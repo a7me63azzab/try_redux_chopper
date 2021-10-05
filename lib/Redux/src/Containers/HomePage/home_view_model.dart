@@ -1,3 +1,4 @@
+import 'package:flutter_redux_navigation/flutter_redux_navigation.dart';
 import 'package:redux/redux.dart';
 import 'package:try_chopper/Redux/src/Actions/home_actions.dart';
 import 'package:try_chopper/Redux/src/Models/home_model/built_post.dart';
@@ -13,6 +14,7 @@ class HomeViewModel {
 
   //Action
   final Function getHomeData;
+  final Function goToPost;
 
   HomeViewModel({
     required this.isLoading,
@@ -20,6 +22,7 @@ class HomeViewModel {
     required this.errorDetails,
     required this.posts,
     required this.getHomeData,
+    required this.goToPost,
   });
 
   static HomeViewModel fromStore(Store<AppState?> store) {
@@ -31,7 +34,10 @@ class HomeViewModel {
       getHomeData: () {
         store.dispatch(getHomeDataThunk());
       },
+      goToPost: (int postId) {
+        store.dispatch(
+            NavigateToAction.replace("/post", arguments: {"id": postId}));
+      },
     );
   }
 }
-

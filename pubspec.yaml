@@ -41,6 +41,7 @@ dependencies:
   synchronized: ^3.0.0
   path_provider: ^2.0.5
   shared_preferences: ^2.0.8
+  flutter_redux_navigation: ^0.7.0
 
 dev_dependencies:
   flutter_test:

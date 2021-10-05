@@ -1,8 +1,8 @@
-
 import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_redux_navigation/flutter_redux_navigation.dart';
 import 'package:logging/logging.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
@@ -27,7 +27,11 @@ void main() async {
 
   final store = Store<AppState>(appReducer,
       initialState: initialState ?? AppState.initial(),
-      middleware: [persistor.createMiddleware(), thunkMiddleware]);
+      middleware: [
+        persistor.createMiddleware(),
+        NavigationMiddleware(),
+        thunkMiddleware
+      ]);
 
   // final store = Store<AppState>(appReducer,
   //     initialState: AppState.initial(), middleware: [thunkMiddleware]);
@@ -45,5 +49,3 @@ void _setupLogging() {
     print("${rec.level.name}: ${rec.time}: ${rec.message}");
   });
 }
-
-

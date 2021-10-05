@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:flutter_redux_navigation/flutter_redux_navigation.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'package:try_chopper/Redux/src/Actions/error_actions.dart';
@@ -41,6 +42,7 @@ ThunkAction loginThunkAction(
           if (response.isSuccessful) {
             print("success from action =-=> ${response.body.toString()}");
             store.dispatch(UserLoginSuccess(lginData: response.body));
+            store.dispatch(NavigateToAction.replace("/home"));
           } else {
             print("error from action =-=> ${response.error.toString()}");
             store.dispatch(UserLoginFailed(lginData: null));

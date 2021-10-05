@@ -38,10 +38,7 @@ class _LoginPageState extends State<LoginPage> {
           onWillChange: (vm, vmx) {
             if (vm?.loginData?.status == 'true') {
               print("SHOW TOAST DATA ${vm?.loginData?.message}");
-              Navigator.of(context)
-                  .push(PageRouteBuilder(pageBuilder: (_, __, ___) {
-                return HomePageRedux();
-              }));
+              
             }
           },
           builder: (BuildContext context, LoginViewModel loginViewModel) {
