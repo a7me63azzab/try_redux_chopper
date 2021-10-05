@@ -4,6 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 import 'package:try_chopper/Redux/Utils/error_notifire.dart';
 import 'package:try_chopper/Redux/src/Actions/login_actions.dart';
+import 'package:try_chopper/Redux/src/Containers/HomePage/home_page.dart';
 import 'package:try_chopper/Redux/src/Models/LoginModel/built_login.dart';
 import 'package:try_chopper/Redux/src/Store/app_store.dart';
 
@@ -25,6 +26,24 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: ErrorNotifier(
         child: StoreConnector<AppState, LoginViewModel>(
+          // onDidChange: (vm, vmx) {
+          //   if (vm?.loginData?.status == 'true') {
+          //     print("SHOW TOAST DATA ${vm?.loginData?.message}");
+          //         Navigator.of(context)
+          //         .push(PageRouteBuilder(pageBuilder: (_, __, ___) {
+          //       return HomePageRedux();
+          //     }));
+          //   }
+          // },
+          onWillChange: (vm, vmx) {
+            if (vm?.loginData?.status == 'true') {
+              print("SHOW TOAST DATA ${vm?.loginData?.message}");
+              Navigator.of(context)
+                  .push(PageRouteBuilder(pageBuilder: (_, __, ___) {
+                return HomePageRedux();
+              }));
+            }
+          },
           builder: (BuildContext context, LoginViewModel loginViewModel) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -36,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
                       size: 100,
                     ),
                   ),
-                  
                   TextFormField(
                     onChanged: (val) {
                       setState(() {
@@ -80,7 +98,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           },
-          converter: (Store<AppState?> store) => LoginViewModel.fromStore(store),
+          converter: (Store<AppState?> store) =>
+              LoginViewModel.fromStore(store),
         ),
       ),
     );

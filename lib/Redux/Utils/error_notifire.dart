@@ -18,7 +18,7 @@ class ErrorNotifier extends StatelessWidget {
       builder: (context, vm) => child,
       onDidChange: (vm, vmx) {
         if (vm!.error != null) {
-          // vmx.markErrorAsHandled!();
+          vm.markErrorAsHandled!();
           print("FROM ERROR NOTIFIER SHOW ERROR -> ${vm.error.toString()}");
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -26,23 +26,8 @@ class ErrorNotifier extends StatelessWidget {
               content: Text(vm.error.toString()),
             ),
           );
-          // Scaffold.of(context).showSnackBar(
-          //   SnackBar(
-          //     content: Text(vm.error.toString()),
-          //   ),
-          // );
         }
       },
-      // onWillChange: (View vm) {
-      //   if (vm.error != null) {
-      //     vm.markErrorAsHandled();
-      //     Scaffold.of(context).showSnackBar(
-      //       SnackBar(
-      //         content: Text(vm.error.toString()),
-      //       ),
-      //     );
-      //   }
-      // },
       distinct: true,
     );
   }
@@ -50,16 +35,16 @@ class ErrorNotifier extends StatelessWidget {
 
 class _ViewModel {
   _ViewModel({
-    // this.markErrorAsHandled,
+    this.markErrorAsHandled,
     this.error,
   });
 
-  // final Function? markErrorAsHandled;
-  final Exception? error;
+  final Function? markErrorAsHandled;
+  final String? error;
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
-      // markErrorAsHandled: () => store.dispatch(ErrorHandledAction()),
+      markErrorAsHandled: () => store.dispatch(ErrorHandledAction()),
       error: store.state.error,
     );
   }

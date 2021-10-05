@@ -1,41 +1,41 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+library post_state;
+
+import 'dart:convert';
+
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:try_chopper/Redux/src/Models/home_model/built_post.dart';
+import 'package:try_chopper/Redux/src/Models/serializers/serializers.dart';
 
-@immutable
-class SinglePostState extends Equatable {
-  final bool isLoading;
-  final bool hasError;
-  final dynamic error;
-  final BuiltPost? post;
+part 'post_state.g.dart';
 
-  SinglePostState(
-      {required this.isLoading,
-      required this.hasError,
-      required this.error,
-      required this.post});
+abstract class PostState implements Built<PostState, PostStateBuilder> {
+  // fields go here
+  bool get isLoading;
+  bool get hasError;
+  String? get error;
+  BuiltPost? get post;
 
-  factory SinglePostState.initial() {
-    return SinglePostState(
-        isLoading: false,
-        hasError: false,
-        error: null,
-        post:null);
+  PostState._();
+
+  factory PostState([updates(PostStateBuilder b)]) = _$PostState;
+
+  factory PostState.initial() {
+    return PostState((p) => p
+      ..isLoading = false
+      ..error = null
+      ..hasError = false
+      ..post = null);
   }
 
-  SinglePostState copyWith(
-      {bool? isLoading,
-      bool? hasError,
-      dynamic error,
-      BuiltPost? post}) {
-    return SinglePostState(
-      isLoading: isLoading ?? this.isLoading,
-      hasError: hasError ?? this.hasError,
-      error: error ?? this.error,
-      post: post ?? this.post,
-    );
+  String toJson() {
+    return json.encode(serializers.serializeWith(PostState.serializer, this));
   }
 
-  @override
-  List<Object?> get props => [isLoading, hasError, error, post];
+  static PostState? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        PostState.serializer, json.decode(jsonString));
+  }
+
+  static Serializer<PostState> get serializer => _$postStateSerializer;
 }

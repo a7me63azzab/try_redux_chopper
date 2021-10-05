@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:try_chopper/Redux/src/Models/serializers/serializers.dart';
 
 part 'built_login.g.dart';
 
@@ -39,6 +40,15 @@ abstract class BuiltUser implements Built<BuiltUser, BuiltUserBuilder> {
 
   factory BuiltUser([updates(BuiltUserBuilder b)]) = _$BuiltUser;
 
+  String toJson() {
+    return json.encode(serializers.serializeWith(BuiltUser.serializer, this));
+  }
+
+  static BuiltUser? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        BuiltUser.serializer, json.decode(jsonString));
+  }
+
   static Serializer<BuiltUser> get serializer => _$builtUserSerializer;
 }
 
@@ -51,6 +61,15 @@ abstract class BuiltBranch implements Built<BuiltBranch, BuiltBranchBuilder> {
 
   factory BuiltBranch([updates(BuiltBranchBuilder b)]) = _$BuiltBranch;
 
+  String toJson() {
+    return json.encode(serializers.serializeWith(BuiltBranch.serializer, this));
+  }
+
+  static BuiltBranch? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        BuiltBranch.serializer, json.decode(jsonString));
+  }
+
   static Serializer<BuiltBranch> get serializer => _$builtBranchSerializer;
 }
 
@@ -62,6 +81,16 @@ abstract class BuiltAuthToken
   BuiltAuthToken._();
 
   factory BuiltAuthToken([updates(BuiltAuthTokenBuilder b)]) = _$BuiltAuthToken;
+
+  String toJson() {
+    return json
+        .encode(serializers.serializeWith(BuiltAuthToken.serializer, this));
+  }
+
+  static BuiltAuthToken? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        BuiltAuthToken.serializer, json.decode(jsonString));
+  }
 
   static Serializer<BuiltAuthToken> get serializer =>
       _$builtAuthTokenSerializer;

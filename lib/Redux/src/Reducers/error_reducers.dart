@@ -1,16 +1,16 @@
 import 'package:redux/redux.dart';
 import 'package:try_chopper/Redux/src/Actions/error_actions.dart';
 
-final Reducer<Exception?> errorReducer = combineReducers<Exception?>([
-  TypedReducer<Exception?, ErrorOccurredAction>(_errorOccurredReducer),
-  // TypedReducer<Exception?, ErrorHandledAction>(_errorHandledReducer),
+final Reducer<String?> errorReducer = combineReducers<String?>([
+  TypedReducer<String?, ErrorOccurredAction>(_errorOccurredReducer),
+  TypedReducer<String?, ErrorHandledAction>(_errorHandledReducer),
 ]);
 
-Exception? _errorOccurredReducer(
-    Exception? exception, ErrorOccurredAction action) {
+String? _errorOccurredReducer(
+    String? exception, ErrorOccurredAction action) {
   return action.exception;
 }
 
-// Exception? _errorHandledReducer(Exception? _, ErrorHandledAction action) {
-//   return Exception();
-// }
+String? _errorHandledReducer(String? _, ErrorHandledAction action) {
+  return null;
+}

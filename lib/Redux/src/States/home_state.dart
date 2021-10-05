@@ -1,42 +1,45 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+library home_state;
+
+import 'dart:convert';
+
 import 'package:built_collection/built_collection.dart';
+import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 import 'package:try_chopper/Redux/src/Models/home_model/built_post.dart';
+import 'package:try_chopper/Redux/src/Models/serializers/serializers.dart';
 
-@immutable
-class HomeState extends Equatable {
-  final bool isLoading;
-  final bool hasError;
-  final dynamic error;
-  final BuiltList<BuiltPost> allPosts;
+part 'home_state.g.dart';
 
-  HomeState(
-      {required this.isLoading,
-      required this.hasError,
-      required this.error,
-      required this.allPosts});
+abstract class HomeState implements Built<HomeState, HomeStateBuilder> {
+  // fields go here
+  bool get isLoading;
+  bool get hasError;
+  String? get error;
+  BuiltList<BuiltPost>? get allPosts;
+
+  HomeState._();
+
+  factory HomeState([updates(HomeStateBuilder b)]) = _$HomeState;
+
 
   factory HomeState.initial() {
-    return HomeState(
-        isLoading: false,
-        hasError: false,
-        error: null,
-        allPosts: BuiltList<BuiltPost>());
+    return HomeState((p) => p
+      ..isLoading = false
+      ..hasError = false
+      ..error = null
+      ..allPosts = ListBuilder<BuiltPost>());
   }
 
-  HomeState copyWith(
-      {bool? isLoading,
-      bool? hasError,
-      dynamic error,
-      BuiltList<BuiltPost>? allPosts}) {
-    return HomeState(
-      isLoading: isLoading ?? this.isLoading,
-      hasError: hasError ?? this.hasError,
-      error: error ?? this.error,
-      allPosts: allPosts ?? this.allPosts,
-    );
+
+
+  String toJson() {
+    return json.encode(serializers.serializeWith(HomeState.serializer, this));
   }
 
-  @override
-  List<Object?> get props => [isLoading, hasError, error, allPosts];
+  static HomeState? fromJson(String jsonString) {
+    return serializers.deserializeWith(
+        HomeState.serializer, json.decode(jsonString));
+  }
+
+  static Serializer<HomeState> get serializer => _$homeStateSerializer;
 }

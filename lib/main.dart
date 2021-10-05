@@ -1,14 +1,42 @@
-import 'package:chopper/chopper.dart';
+
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:provider/provider.dart';
-import 'package:try_chopper/Pages/home_page.dart';
+import 'package:redux/redux.dart';
+import 'package:redux_thunk/redux_thunk.dart';
+import 'package:try_chopper/Redux/Utils/Persistor/persistor.dart';
+import 'package:try_chopper/Redux/Utils/Persistor/serialization.dart';
+import 'package:try_chopper/Redux/Utils/flutter_save_location.dart';
+import 'package:try_chopper/Redux/src/Reducers/app_reducers.dart';
+import 'package:try_chopper/Redux/src/Store/app_store.dart';
 import 'package:try_chopper/Redux/try_redux_app.dart';
-import 'package:try_chopper/data/post_api_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   _setupLogging();
-  runApp(TryReduxState());
+  // Create Persistor
+  final persistor = Persistor<AppState>(
+    storage: FlutterStorage(),
+    serializer: CustomAppStateSerializer<AppState>(AppState.fromJson),
+  );
+
+  // // Load initial state
+  final initialState = await persistor.load();
+
+  final store = Store<AppState>(appReducer,
+      initialState: initialState ?? AppState.initial(),
+      middleware: [persistor.createMiddleware(), thunkMiddleware]);
+
+  // final store = Store<AppState>(appReducer,
+  //     initialState: AppState.initial(), middleware: [thunkMiddleware]);
+
+  print("all app states -=-=> ${store.state.toJson()}");
+
+  runApp(TryReduxState(
+    store: store,
+  ));
 }
 
 void _setupLogging() {
@@ -18,16 +46,4 @@ void _setupLogging() {
   });
 }
 
-// class TryChopperApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Provider(
-//       create: (context) => PostApiService.create(),
-//       dispose: (context, PostApiService service) => service.client.dispose(),
-//       child: MaterialApp(
-//         title: 'Chopper :)',
-//         home: HomePage(),
-//       ),
-//     );
-//   }
-// }
+

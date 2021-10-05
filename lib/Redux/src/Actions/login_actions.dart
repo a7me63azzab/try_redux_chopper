@@ -43,13 +43,14 @@ ThunkAction loginThunkAction(
             store.dispatch(UserLoginSuccess(lginData: response.body));
           } else {
             print("error from action =-=> ${response.error.toString()}");
-            store.dispatch(UserLoginFailed(lginData: response.body));
+            store.dispatch(UserLoginFailed(lginData: null));
             // print("error from action =-=> ${response.body?.message}");
             BuiltErrorResponse? errorResponse =
                 response.error as BuiltErrorResponse;
             store.dispatch(
               ErrorOccurredAction(
-                Exception("${errorResponse.message}"),
+                // Exception("${errorResponse.message}"),
+                "${errorResponse.message}"
               ),
             );
           }
@@ -62,7 +63,8 @@ ThunkAction loginThunkAction(
             //     response.error as BuiltErrorResponse;
             store.dispatch(
               ErrorOccurredAction(
-                Exception("$err"),
+                // Exception("$err"),
+                "$err",
               ),
             );
         }

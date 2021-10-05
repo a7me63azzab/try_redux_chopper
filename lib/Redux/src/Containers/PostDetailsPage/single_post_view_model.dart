@@ -21,10 +21,10 @@ class SinglePostViewModel {
 
   static SinglePostViewModel fromStore(Store<AppState?> store) {
     return SinglePostViewModel(
-      isLoading: store.state?.singlePostState.isLoading,
-      hasError: store.state?.singlePostState.hasError,
-      errorDetails: store.state?.singlePostState.error,
-      post: store.state?.singlePostState.post,
+      isLoading: store.state?.postState.isLoading,
+      hasError: store.state?.postState.hasError,
+      errorDetails: store.state?.postState.error,
+      post: store.state?.postState.post,
       
     );
   }

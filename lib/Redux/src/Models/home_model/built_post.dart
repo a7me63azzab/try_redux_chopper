@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:try_chopper/Redux/src/Models/serializers/serializers.dart';
 
 part 'built_post.g.dart';
 
@@ -20,13 +21,13 @@ abstract class BuiltPost implements Built<BuiltPost, BuiltPostBuilder> {
 
   factory BuiltPost([updates(BuiltPostBuilder b)]) = _$BuiltPost;
 
-  // String toJson() {
-  //   return json.encode(serializers.serializeWith(BuiltPost.serializer, this));
-  // }
+  String toJson() {
+    return json.encode(serializers.serializeWith(BuiltPost.serializer, this));
+  }
 
-  // static BuiltPost fromJson(String jsonString) {
-  //   return serializers.deserializeWith(BuiltPost.serializer, json.decode(jsonString));
-  // }
+  static BuiltPost? fromJson(String jsonString) {
+    return serializers.deserializeWith(BuiltPost.serializer, json.decode(jsonString));
+  }
 
   static Serializer<BuiltPost> get serializer => _$builtPostSerializer;
 }

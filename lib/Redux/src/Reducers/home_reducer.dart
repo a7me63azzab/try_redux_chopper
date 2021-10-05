@@ -11,26 +11,43 @@ final homeReducer = combineReducers<HomeState>([
 ]);
 
 HomeState _getHomeDataSuccess(HomeState state, GetHomeDataSuccess action) {
-  return state.copyWith(
-    isLoading: false,
-    hasError: false,
-    error: null,
-    allPosts: action.posts,
-  );
+  // return state.copyWith(
+  //   isLoading: false,
+  //   hasError: false,
+  //   error: null,
+  //   allPosts: action.posts,
+  // );
+  return state.rebuild((p) => p
+    ..isLoading = false
+    ..hasError = false
+    ..error = null
+    ..allPosts = action.posts?.toBuilder());
 }
 
 HomeState _getHomeDataFailed(HomeState state, GetHomeDataFailed action) {
-  return state.copyWith(
-      isLoading: false,
-      hasError: true,
-      error: "Server Error!",
-      allPosts: BuiltList<BuiltPost>());
+  // return state.copyWith(
+  //     isLoading: false,
+  //     hasError: true,
+  //     error: "Server Error!",
+  //     allPosts: BuiltList<BuiltPost>());
+
+  return state.rebuild((p) => p
+    ..isLoading = false
+    ..hasError = true
+    ..error = "Server Error!"
+    ..allPosts = ListBuilder<BuiltPost>());
 }
 
 HomeState _startLoading(HomeState state, GetHomeDataStart action) {
-  return state.copyWith(
-      isLoading: true,
-      hasError: false,
-      error: null,
-      allPosts: BuiltList<BuiltPost>());
+  // return state.copyWith(
+  //     isLoading: true,
+  //     hasError: false,
+  //     error: null,
+  //     allPosts: BuiltList<BuiltPost>());
+
+  return state.rebuild((p) => p
+    ..isLoading = true
+    ..hasError = false
+    ..error = null
+    ..allPosts = ListBuilder<BuiltPost>());
 }
