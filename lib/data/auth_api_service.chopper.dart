@@ -30,4 +30,21 @@ class _$AuthApiService extends AuthApiService {
         Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
     return client.send<BuiltLogin, BuiltLogin>($request);
   }
+
+  @override
+  Future<Response<LogoutModel>> userLogout(
+      LogoutDataModel body, String authToken, String lang) {
+    final $url = '/api/auth/logout';
+    final $headers = {
+      'Authorization': authToken,
+      'Accept-Language': lang,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+
+    final $body = body;
+    final $request =
+        Request('POST', $url, client.baseUrl, body: $body, headers: $headers);
+    return client.send<LogoutModel, LogoutModel>($request);
+  }
 }

@@ -18,6 +18,26 @@ class HomePageRedux extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text("All Posts"),
+        actions: [
+          StoreConnector<AppState, LogoutViewModel>(
+            builder: (BuildContext context, LogoutViewModel logoutViewModel) {
+              if (logoutViewModel.isLoading == true) {
+                return Center(
+                  child: CupertinoActivityIndicator(),
+                );
+              } else {
+                return InkWell(
+                  onTap: () {
+                    logoutViewModel.logoutAction();
+                  },
+                  child: Icon(Icons.logout),
+                );
+              }
+            },
+            converter: (Store<AppState?> store) =>
+                LogoutViewModel.fromStore(store),
+          ),
+        ],
       ),
       body: StoreConnector<AppState, HomeViewModel>(
         onInit: (Store<AppState?> store) {

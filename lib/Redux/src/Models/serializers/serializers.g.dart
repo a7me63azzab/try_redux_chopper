@@ -17,6 +17,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(BuiltUser.serializer)
       ..add(HomeState.serializer)
       ..add(LoginState.serializer)
+      ..add(LogoutDataModel.serializer)
+      ..add(LogoutModel.serializer)
       ..add(PostState.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(BuiltPost)]),

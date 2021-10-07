@@ -5,6 +5,7 @@ import 'package:redux/redux.dart';
 import 'package:try_chopper/Redux/src/Containers/Auth/LoginPage/login_page.dart';
 import 'package:try_chopper/Redux/src/Containers/HomePage/home_page.dart';
 import 'package:try_chopper/Redux/src/Containers/PostDetailsPage/single_post_screen.dart';
+import 'package:try_chopper/Redux/src/Containers/SplashScreen/splash_screen.dart';
 import 'package:try_chopper/Redux/src/Store/app_store.dart';
 
 class TryReduxState extends StatelessWidget {
@@ -18,7 +19,7 @@ class TryReduxState extends StatelessWidget {
       store: store,
       child: MaterialApp(
         title: 'Material App',
-        home: LoginPage(),
+        // home: LoginPage(),
         navigatorKey: NavigatorHolder.navigatorKey,
         onGenerateRoute: _getRoute,
       ),
@@ -41,8 +42,13 @@ class TryReduxState extends StatelessWidget {
             postId: (settings.arguments as Map)['id'],
           ),
         );
+      case '/splash':
+        return _buildRoute(
+          settings,
+          SplashScreen(),
+        );
       default:
-        return _buildRoute(settings, LoginPage());
+        return _buildRoute(settings, SplashScreen());
     }
   }
 

@@ -1,9 +1,7 @@
-
 library app_state;
 
 import 'dart:convert';
 
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:try_chopper/Redux/src/Models/serializers/serializers.dart';
@@ -18,6 +16,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   HomeState get homeState;
   PostState get postState;
   LoginState get loginState;
+  // LogoutState get logoutState;
   String? get error;
 
   AppState._();
@@ -29,6 +28,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
       ..homeState = HomeState.initial().toBuilder()
       ..loginState = LoginState.initial().toBuilder()
       ..postState = PostState.initial().toBuilder()
+      // ..logoutState = LogoutState.initial().toBuilder()
       ..error = null);
   }
 

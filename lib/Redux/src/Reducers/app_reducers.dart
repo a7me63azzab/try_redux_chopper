@@ -8,7 +8,7 @@ AppState appReducer(AppState state, action) {
   return AppState(
     (p) => p
       ..homeState = homeReducer(state.homeState, action).toBuilder()
-      ..loginState = loginReducer(state.loginState, action).toBuilder()
+      ..loginState = authReducer(state.loginState, action).toBuilder()
       ..postState = singlePostReducer(state.postState, action).toBuilder()
       ..error = errorReducer(state.error, action),
   );
